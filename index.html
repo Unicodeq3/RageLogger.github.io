@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 800px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #0077cc;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px;
+        }
+
+        ul {
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li span {
+            flex: 1;
+            margin-right: 10px;
+            word-break: break-all;
+        }
+
+        li button {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Event logger</h1>
+        <ul id="itemList"></ul>
+    </div>
+    <script>
+        function addItem(newItem) {
+            var itemList = document.getElementById("itemList");
+            var li = document.createElement("li");
+            var span = document.createElement("span");
+            var copyBtn = document.createElement("button");
+            span.innerHTML = newItem;
+            copyBtn.innerHTML = "Копировать";
+            copyBtn.onclick = function () {
+                var textToCopy = span.innerHTML;
+                var tempInput = document.createElement("input");
+                tempInput.setAttribute("value", textToCopy);
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.body.removeChild(tempInput);
+            };
+            li.appendChild(span);
+            li.appendChild(copyBtn);
+            itemList.appendChild(li);
+            if (itemList.children.length > 15) {
+                itemList.removeChild(itemList.children[0]);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
