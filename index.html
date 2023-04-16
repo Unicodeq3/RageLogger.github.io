@@ -67,6 +67,10 @@
         li button {
             background-color: #ccc;
         }
+
+        html {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -82,14 +86,20 @@
             var span = document.createElement("span");
             var copyBtn = document.createElement("button");
             span.innerHTML = newItem;
-            copyBtn.innerHTML = "Копировать";
+            copyBtn.innerHTML = "Выделить";
             copyBtn.onclick = function () {
-                var textToCopy = span.innerHTML;
-                var tempInput = document.createElement("input");
-                tempInput.setAttribute("value", textToCopy);
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.body.removeChild(tempInput);
+                // var textToCopy = span.innerHTML;
+                // var tempInput = document.createElement("input");
+                // tempInput.setAttribute("value", textToCopy);
+                // document.body.appendChild(tempInput);
+                // tempInput.select();
+                // document.body.removeChild(tempInput);
+
+                var range = document.createRange();
+                range.selectNodeContents(span);
+                var selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
             };
             li.appendChild(span);
             li.appendChild(copyBtn);
